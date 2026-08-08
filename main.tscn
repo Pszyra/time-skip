@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://de1t3mfgo14lc"]
+
+[ext_resource type="Script" uid="uid://c4bdlhnj4b3bo" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cudrykq0gxewa" path="res://TimelineCanvas.gd" id="1_ig7tw"]
+
+[node name="Main" type="Control" unique_id=87523776 node_paths=PackedStringArray("timeline_canvas", "events_layer", "setup_dialog", "start_year_spin", "end_year_spin", "inspector_panel", "name_edit", "date_edit", "placement_option", "color_picker", "delete_btn")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xm2m")
+timeline_canvas = NodePath("TimelineArea/TimelineCanvas")
+events_layer = NodePath("TimelineArea/EventsLayer")
+setup_dialog = NodePath("SetupDialog")
+start_year_spin = NodePath("SetupDialog/VBoxContainer/HBoxContainer/StartYearSpin")
+end_year_spin = NodePath("SetupDialog/VBoxContainer/HBoxContainer2/EndYearSpin")
+inspector_panel = NodePath("InspectorPanel")
+name_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/NameEdit")
+date_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DateEdit")
+placement_option = NodePath("InspectorPanel/MarginContainer/VBoxContainer/PlacementOption")
+color_picker = NodePath("InspectorPanel/MarginContainer/VBoxContainer/EventColorPicker")
+delete_btn = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=38602186]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.92535293, 0.9253528, 0.9253529, 1)
+
+[node name="TimelineArea" type="Control" parent="." unique_id=377072378]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TimelineCanvas" type="Control" parent="TimelineArea" unique_id=1006437706]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_ig7tw")
+
+[node name="EventsLayer" type="Control" parent="TimelineArea" unique_id=1369740686]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InspectorPanel" type="PanelContainer" parent="." unique_id=1617447826]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -325.0
+offset_bottom = 325.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="InspectorPanel" unique_id=1052919123]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InspectorPanel/MarginContainer" unique_id=216242910]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1440225493]
+layout_mode = 2
+text = "Edit menu"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1320501764]
+layout_mode = 2
+
+[node name="NameEdit" type="LineEdit" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=955942]
+layout_mode = 2
+
+[node name="DateEdit" type="LineEdit" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=605857723]
+layout_mode = 2
+
+[node name="PlacementOption" type="OptionButton" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1500134847]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Above"
+popup/item_0/id = 0
+popup/item_1/text = "Below"
+popup/item_1/id = 1
+
+[node name="EventColorPicker" type="ColorPickerButton" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=622322231]
+layout_mode = 2
+text = "Color"
+
+[node name="DeleteBtn" type="Button" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=164708350]
+layout_mode = 2
+text = "Delete event"
+
+[node name="SetupDialog" type="AcceptDialog" parent="." unique_id=736416122]
+oversampling_override = 1.0
+title = "Choose timeline range"
+size = Vector2i(250, 130)
+visible = true
+ok_button_text = "Confirm"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SetupDialog" unique_id=804802376]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.0
+offset_top = 8.0
+offset_right = 117.0
+offset_bottom = 81.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SetupDialog/VBoxContainer" unique_id=1967432177]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SetupDialog/VBoxContainer/HBoxContainer" unique_id=1134736565]
+layout_mode = 2
+text = "Start year:   "
+
+[node name="StartYearSpin" type="SpinBox" parent="SetupDialog/VBoxContainer/HBoxContainer" unique_id=37711782]
+layout_mode = 2
+min_value = 1900.0
+max_value = 2100.0
+value = 2020.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SetupDialog/VBoxContainer" unique_id=2030867027]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="SetupDialog/VBoxContainer/HBoxContainer2" unique_id=1556014838]
+layout_mode = 2
+text = "End year:     "
+
+[node name="EndYearSpin" type="SpinBox" parent="SetupDialog/VBoxContainer/HBoxContainer2" unique_id=1504771013]
+layout_mode = 2
+min_value = 1900.0
+max_value = 2100.0
+value = 2020.0
