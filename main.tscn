@@ -103,6 +103,7 @@ text = "Delete event"
 [node name="SetupDialog" type="AcceptDialog" parent="." unique_id=736416122]
 oversampling_override = 1.0
 title = "Choose timeline range"
+position = Vector2i(0, 36)
 size = Vector2i(250, 130)
 visible = true
 ok_button_text = "Confirm"
