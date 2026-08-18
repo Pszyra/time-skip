@@ -13,7 +13,7 @@ const EVENT_SCENE: PackedScene = preload("res://TimelineEvent.tscn")
 
 @export_group("Inspector Panel")
 @export var inspector_panel: PanelContainer
-@export var name_edit: LineEdit
+@export var name_edit: TextEdit
 @export var date_edit: LineEdit
 @export var placement_option: OptionButton
 @export var color_picker: ColorPickerButton
@@ -119,9 +119,9 @@ func _select_event(ev: TimelineEvent):
 	placement_option.selected = 0 if ev.is_above else 1
 	color_picker.color = ev.event_color
 
-func _on_inspector_name_changed(new_name: String):
+func _on_inspector_name_changed():
 	if is_instance_valid(active_event):
-		active_event.event_name = new_name
+		active_event.event_name = name_edit.text
 		active_event._update_visuals()
 
 func _on_inspector_date_submitted(new_date_str: String):
