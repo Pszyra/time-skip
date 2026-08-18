@@ -108,19 +108,19 @@ text = "Delete event"
 [node name="SetupDialog" type="AcceptDialog" parent="." unique_id=736416122]
 oversampling_override = 1.0
 title = "Choose timeline range"
-position = Vector2i(0, 36)
-size = Vector2i(250, 130)
+position = Vector2i(50, 50)
+size = Vector2i(402, 100)
 visible = true
 ok_button_text = "Confirm"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SetupDialog" unique_id=804802376]
+[node name="VBoxContainer" type="HBoxContainer" parent="SetupDialog" unique_id=1114120687]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -117.0
+offset_left = -193.0
 offset_top = 8.0
-offset_right = 117.0
-offset_bottom = 81.0
+offset_right = 193.0
+offset_bottom = 51.0
 grow_horizontal = 2
 alignment = 1
 
@@ -137,6 +137,10 @@ layout_mode = 2
 min_value = 1900.0
 max_value = 2100.0
 value = 2020.0
+
+[node name="VSeparator" type="VSeparator" parent="SetupDialog/VBoxContainer" unique_id=1858818975]
+layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="SetupDialog/VBoxContainer" unique_id=2030867027]
 layout_mode = 2
