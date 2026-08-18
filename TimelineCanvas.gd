@@ -146,7 +146,7 @@ func _draw():
 						draw_line(Vector2(day_x, axis_y - 8), Vector2(day_x, axis_y + 8), Color(0.5, 0.5, 0.5, 0.6), 1.0)
 						if px_per_day > 10.0:
 							draw_string(font, Vector2(day_x + 5, axis_y + 20), str(d), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size - 2, Color(0.2, 0.2, 0.2))
-
+					
 					if px_per_hour > 5.0:
 						var hour_step: int = 6
 						if px_per_hour > 30.0: hour_step = 1
@@ -161,7 +161,7 @@ func _draw():
 							if hr_x >= 0 and hr_x <= width:
 								draw_line(Vector2(hr_x, axis_y - 4), Vector2(hr_x, axis_y + 4), Color(0.6, 0.6, 0.6, 0.5), 1.0)
 								
-								if px_per_hour > 40.0:
+								if px_per_hour > 10.0:
 									var hr_label: String = str(h) + ":00"
 									draw_string(font, Vector2(hr_x - 10, axis_y - 12), hr_label, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size - 3, Color(0.3, 0.3, 0.3))
 		var year_x: float = time_to_x(float(year_ts))

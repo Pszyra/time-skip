@@ -11,7 +11,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ihjc2")
 
+[node name="SpanBar" type="ColorRect" parent="." unique_id=1677610961]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
 [node name="Line" type="Line2D" parent="." unique_id=104420417]
+width = 2.0
 
 [node name="Card" type="PanelContainer" parent="." unique_id=1394398827]
 layout_mode = 0

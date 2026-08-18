@@ -5,6 +5,7 @@ signal selected(event_node: TimelineEvent)
 
 @export var event_name: String = "New Event"
 @export var timestamp: int = 0
+@export var end_timestamp: int = 0 
 @export var is_above: bool = true
 @export var event_color: Color = Color(0.2, 0.6, 0.86)
 
@@ -12,6 +13,7 @@ signal selected(event_node: TimelineEvent)
 @onready var stalk_line: Line2D = $Line
 @onready var title_label: Label = $Card/MarginContainer/VBoxContainer/TitleLabel
 @onready var date_label: Label = $Card/MarginContainer/VBoxContainer/DateLabel
+@onready var span_bar: ColorRect = $SpanBar 
 
 var current_stalk_height: float = 90.0
 
@@ -31,19 +33,33 @@ func set_event_data(n_name: String, n_ts: int, n_above: bool, n_color: Color):
 	event_color = n_color
 	_update_visuals()
 
+func update_span_visual(canvas: TimelineCanvas):
+	if not is_instance_valid(span_bar): return
+	
+	if end_timestamp > timestamp:
+		span_bar.visible = true
+		var start_x = canvas.time_to_x(float(timestamp))
+		var end_x = canvas.time_to_x(float(end_timestamp))
+		var bar_width = end_x - start_x
+		
+		span_bar.size = Vector2(bar_width, 8)
+		span_bar.position = Vector2(-bar_width / 2.0, -4) 
+		
+		span_bar.color = event_color
+		span_bar.color.a = 0.5 
+	else:
+		span_bar.visible = false
+
 func _update_visuals():
-	if not is_inside_tree():
-		return
+	if not is_inside_tree(): return
+	
 	title_label.text = event_name
-	var dt: Dictionary = Time.get_datetime_dict_from_unix_time(timestamp) as Dictionary
+	var dt: Dictionary = Time.get_datetime_dict_from_unix_time(timestamp)
 	date_label.text = "%04d-%02d-%02d %02d:%02d" % [int(dt.year), int(dt.month), int(dt.day), int(dt.hour), int(dt.minute)]
 	
 	var style_box := StyleBoxFlat.new()
 	style_box.bg_color = event_color
-	style_box.corner_radius_top_left = 6
-	style_box.corner_radius_top_right = 6
-	style_box.corner_radius_bottom_left = 6
-	style_box.corner_radius_bottom_right = 6
+	style_box.set_corner_radius_all(6)
 	style_box.content_margin_left = 8
 	style_box.content_margin_right = 8
 	style_box.content_margin_top = 4
@@ -57,7 +73,6 @@ func _update_visuals():
 	stalk_line.add_point(Vector2.ZERO)
 	stalk_line.add_point(Vector2(0, target_y))
 	stalk_line.default_color = event_color
-	stalk_line.width = 2.0
 	
 	card.reset_size()
 	card.position = Vector2(-card.size.x * 0.5, target_y - (card.size.y if is_above else 0.0))
