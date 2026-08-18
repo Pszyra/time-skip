@@ -62,31 +62,35 @@ func _recalculate_stacking(events: Array[TimelineEvent]):
 	var above_events = events.filter(func(e): return e.is_above)
 	var below_events = events.filter(func(e): return not e.is_above)
 	
-	var above_lanes: Array[float] = []
-	var below_lanes: Array[float] = []
-	
-	var base_height: float = 50.0
-	var lane_spacing: float = 65.0
-	var horizontal_padding: float = 10.0
-	
-	for ev in above_events:
-		var card_width: float = ev.card.size.x
-		var left_x: float = ev.position.x - (card_width / 2.0)
-		var right_x: float = ev.position.x + (card_width / 2.0)
-		
-		var assigned_lane: int = _find_free_lane(above_lanes, left_x, horizontal_padding)
-		ev.current_stalk_height = base_height + (assigned_lane * lane_spacing)
-		above_lanes[assigned_lane] = right_x
-		ev._update_visuals()
+	_layout_stacking(above_events)
+	_layout_stacking(below_events)
 
-	for ev in below_events:
-		var card_width: float = ev.card.size.x
-		var left_x: float = ev.position.x - (card_width / 2.0)
-		var right_x: float = ev.position.x + (card_width / 2.0)
+func _layout_stacking(side_events: Array):
+	var lanes_right_x: Array[float] = []
+	var lanes_max_height: Array[float] = []
+	
+	var base_offset: float = 50.0
+	var vertical_padding: float = 20.0
+	var horizontal_padding: float = 15.0
+	
+	for ev in side_events:
+		var card_size: Vector2 = ev.card.get_combined_minimum_size()
 		
-		var assigned_lane: int = _find_free_lane(below_lanes, left_x, horizontal_padding)
-		ev.current_stalk_height = base_height + (assigned_lane * lane_spacing)
-		below_lanes[assigned_lane] = right_x
+		var left_x: float = ev.position.x - (card_size.x / 2.0)
+		var right_x: float = ev.position.x + (card_size.x / 2.0)
+		
+		var lane_idx: int = _find_free_lane(lanes_right_x, left_x, horizontal_padding)
+		lanes_right_x[lane_idx] = right_x
+		
+		while lanes_max_height.size() <= lane_idx:
+			lanes_max_height.append(0.0)
+		lanes_max_height[lane_idx] = max(lanes_max_height[lane_idx], card_size.y)
+		
+		var total_stalk_height: float = base_offset
+		for i in range(lane_idx):
+			total_stalk_height += lanes_max_height[i] + vertical_padding
+			
+		ev.current_stalk_height = total_stalk_height
 		ev._update_visuals()
 
 func _find_free_lane(lanes: Array[float], left_x: float, padding: float) -> int:
