@@ -39,7 +39,6 @@ func _ready():
 	start_year_spin.value = Time.get_date_dict_from_system().year
 	end_year_spin.value = Time.get_date_dict_from_system().year
 
-	
 func _process(_delta: float):
 	if not timeline_canvas: return
 	

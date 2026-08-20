@@ -25,7 +25,7 @@ inspector_panel = NodePath("InspectorPanel")
 name_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/NameEdit")
 date_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DateEdit")
 end_date_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/EndDateEdit")
-placement_option = NodePath("InspectorPanel/MarginContainer/VBoxContainer/PlacementOption")
+placement_option = NodePath("InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer/PlacementOption")
 color_picker = NodePath("InspectorPanel/MarginContainer/VBoxContainer/EventColorPicker")
 delete_btn = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn")
 
@@ -98,12 +98,15 @@ placeholder_text = "Event start date"
 layout_mode = 2
 placeholder_text = "Event end date"
 
-[node name="Label2" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1271950681]
+[node name="VBoxContainer" type="VBoxContainer" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1183420515]
 layout_mode = 2
-text = "Edit menu"
+
+[node name="Label2" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1271950681]
+layout_mode = 2
+text = "Event location"
 horizontal_alignment = 1
 
-[node name="PlacementOption" type="OptionButton" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1500134847]
+[node name="PlacementOption" type="OptionButton" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1500134847]
 layout_mode = 2
 item_count = 2
 popup/item_0/text = "Above"
