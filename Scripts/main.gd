@@ -36,6 +36,10 @@ func _ready():
 	color_picker.color_changed.connect(_on_inspector_color_changed)
 	delete_btn.pressed.connect(_on_inspector_delete_pressed)
 	
+	start_year_spin.value = Time.get_date_dict_from_system().year
+	end_year_spin.value = Time.get_date_dict_from_system().year
+
+	
 func _process(_delta: float):
 	if not timeline_canvas: return
 	

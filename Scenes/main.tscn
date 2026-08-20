@@ -87,13 +87,21 @@ layout_mode = 2
 
 [node name="NameEdit" type="TextEdit" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1748810414]
 layout_mode = 2
+placeholder_text = "Enter event name"
 scroll_fit_content_height = true
 
 [node name="DateEdit" type="LineEdit" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=605857723]
 layout_mode = 2
+placeholder_text = "Event start date"
 
 [node name="EndDateEdit" type="LineEdit" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=58986957]
 layout_mode = 2
+placeholder_text = "Event end date"
+
+[node name="Label2" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1271950681]
+layout_mode = 2
+text = "Edit menu"
+horizontal_alignment = 1
 
 [node name="PlacementOption" type="OptionButton" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1500134847]
 layout_mode = 2
@@ -142,7 +150,7 @@ text = "Start year:   "
 layout_mode = 2
 min_value = 1900.0
 max_value = 2100.0
-value = 2020.0
+value = 1900.0
 
 [node name="VSeparator" type="VSeparator" parent="SetupDialog/VBoxContainer" unique_id=1858818975]
 layout_mode = 2
@@ -160,4 +168,4 @@ text = "End year:     "
 layout_mode = 2
 min_value = 1900.0
 max_value = 2100.0
-value = 2020.0
+value = 1900.0
