@@ -18,6 +18,7 @@ offset_bottom = 40.0
 mouse_filter = 2
 
 [node name="Line" type="Line2D" parent="." unique_id=104420417]
+z_index = -1
 width = 2.0
 
 [node name="Card" type="PanelContainer" parent="." unique_id=1394398827]

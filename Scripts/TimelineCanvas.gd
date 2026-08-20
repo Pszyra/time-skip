@@ -159,7 +159,7 @@ func _draw():
 							
 							var hr_x: float = time_to_x(float(hr_ts))
 							if hr_x >= 0 and hr_x <= width:
-								draw_line(Vector2(hr_x, axis_y - 4), Vector2(hr_x, axis_y + 4), Color(0.6, 0.6, 0.6, 0.5), 1.0)
+								draw_line(Vector2(hr_x, axis_y - 5), Vector2(hr_x, axis_y + 5), Color(0.545, 0.545, 0.545, 0.745), 1.0)
 								
 								if px_per_hour > 10.0:
 									var hr_label: String = str(h) + ":00"
