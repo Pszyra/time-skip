@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3u61c6uhl0nb"]
 
-[ext_resource type="Script" uid="uid://c1oaxek7hprly" path="res://timeline_event.gd" id="1_ihjc2"]
+[ext_resource type="Script" uid="uid://c1oaxek7hprly" path="res://Scripts/timeline_event.gd" id="1_ihjc2"]
 
 [node name="TimelineEvent" type="Control" unique_id=69872753]
 layout_mode = 3

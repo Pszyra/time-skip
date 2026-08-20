@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://de1t3mfgo14lc"]
 
-[ext_resource type="Script" uid="uid://c4bdlhnj4b3bo" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://cudrykq0gxewa" path="res://TimelineCanvas.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://c4bdlhnj4b3bo" path="res://Scripts/main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cudrykq0gxewa" path="res://Scripts/TimelineCanvas.gd" id="1_ig7tw"]
 
 [node name="Main" type="Control" unique_id=87523776 node_paths=PackedStringArray("timeline_canvas", "events_layer", "setup_dialog", "start_year_spin", "end_year_spin", "inspector_panel", "name_edit", "date_edit", "end_date_edit", "placement_option", "color_picker", "delete_btn")]
 layout_mode = 3

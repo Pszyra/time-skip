@@ -1,6 +1,6 @@
 extends Control
 
-const EVENT_SCENE: PackedScene = preload("res://TimelineEvent.tscn")
+const EVENT_SCENE: PackedScene = preload("res://Scenes/TimelineEvent.tscn")
 
 @export_group("Core")
 @export var timeline_canvas: TimelineCanvas
