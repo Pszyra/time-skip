@@ -13,7 +13,7 @@ signal selected(event_node: TimelineEvent)
 @onready var stalk_line: Line2D = $Line
 @onready var title_label: Label = $Card/MarginContainer/VBoxContainer/TitleLabel
 @onready var date_label: Label = $Card/MarginContainer/VBoxContainer/DateLabel
-@onready var span_bar: ColorRect = $SpanBar 
+@onready var span_bar: ColorRect = $SpanBar
 
 var current_stalk_height: float = 90.0
 
@@ -55,7 +55,14 @@ func _update_visuals():
 	
 	title_label.text = event_name
 	var dt: Dictionary = Time.get_datetime_dict_from_unix_time(timestamp)
-	date_label.text = "%04d-%02d-%02d %02d:%02d" % [int(dt.year), int(dt.month), int(dt.day), int(dt.hour), int(dt.minute)]
+	var start_date_str: String = "%04d-%02d-%02d %02d:%02d" % [int(dt.year), int(dt.month), int(dt.day), int(dt.hour), int(dt.minute)]
+	
+	if end_timestamp > timestamp:
+		var edt: Dictionary = Time.get_datetime_dict_from_unix_time(end_timestamp)
+		var end_date_str: String = "%04d-%02d-%02d %02d:%02d" % [int(edt.year), int(edt.month), int(edt.day), int(edt.hour), int(edt.minute)]
+		date_label.text = start_date_str + " - " + end_date_str
+	else:
+		date_label.text = start_date_str
 	
 	var style_box := StyleBoxFlat.new()
 	style_box.bg_color = event_color
