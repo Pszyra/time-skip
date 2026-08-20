@@ -30,6 +30,7 @@ color_picker = NodePath("InspectorPanel/MarginContainer/VBoxContainer/EventColor
 delete_btn = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=38602186]
+z_index = -2
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0

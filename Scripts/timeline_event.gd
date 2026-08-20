@@ -19,6 +19,8 @@ var current_stalk_height: float = 90.0
 
 func _ready():
 	card.gui_input.connect(_on_card_gui_input)
+	stalk_line.z_index = -1
+	
 	_update_visuals()
 
 func _on_card_gui_input(event: InputEvent):

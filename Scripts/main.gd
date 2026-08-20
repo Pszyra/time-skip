@@ -35,7 +35,7 @@ func _ready():
 	placement_option.item_selected.connect(_on_inspector_placement_selected)
 	color_picker.color_changed.connect(_on_inspector_color_changed)
 	delete_btn.pressed.connect(_on_inspector_delete_pressed)
-
+	
 func _process(_delta: float):
 	if not timeline_canvas: return
 	
