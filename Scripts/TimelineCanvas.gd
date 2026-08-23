@@ -113,6 +113,7 @@ func _draw():
 	
 	var px_per_day: float = zoom * sec_day
 	var px_per_hour: float = zoom * sec_hour
+	var px_per_min: float = zoom * 60.0
 
 	for y: int in range(int(dt_start.year), int(dt_end.year) + 1):
 		var year_ts: int = int(Time.get_unix_time_from_datetime_dict({"year": y, "month": 1, "day": 1, "hour": 0, "minute": 0, "second": 0}))
@@ -120,8 +121,10 @@ func _draw():
 		
 		for m: int in range(1, 13):
 			var month_ts: int = int(Time.get_unix_time_from_datetime_dict({"year": y, "month": m, "day": 1, "hour": 0, "minute": 0, "second": 0}))
-			if month_ts < start_time - (31 * sec_day): continue
-			if month_ts > end_time: break
+			var days_in_month: int = get_days_in_month(m, y)
+			
+			if month_ts + (days_in_month * sec_day) < visible_start_t: continue
+			if month_ts > visible_end_t: break
 			
 			var month_x: float = time_to_x(float(month_ts))
 			
@@ -131,18 +134,18 @@ func _draw():
 					draw_string(font, Vector2(month_x + 5, axis_y - 25), month_names[m - 1], HORIZONTAL_ALIGNMENT_LEFT, -1, font_size - 2, Color.BLACK)			
 			
 			if px_per_day > 10.0:
-				var days_in_month: int = get_days_in_month(m, y)
 				var day_step: int = 1
 				if px_per_day < 20.0: day_step = 5
 				elif px_per_day < 40.0: day_step = 2
 				
-				for d: int in range(1, days_in_month + 1):
+				for d: int in range(1, days_in_month + 1, day_step):
 					var day_ts: int = month_ts + ((d - 1) * sec_day)
-					if day_ts < start_time: continue
-					if day_ts > end_time: break
+					
+					if day_ts + (day_step * sec_day) < visible_start_t: continue
+					if day_ts > visible_end_t: break
 					
 					var day_x: float = time_to_x(float(day_ts))
-					if d % day_step == 0 and day_x >= 0 and day_x <= width:
+					if day_x >= 0 and day_x <= width:
 						draw_line(Vector2(day_x, axis_y - 8), Vector2(day_x, axis_y + 8), Color(0.5, 0.5, 0.5, 0.6), 1.0)
 						if px_per_day > 10.0:
 							draw_string(font, Vector2(day_x + 5, axis_y + 20), str(d), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size - 2, Color(0.2, 0.2, 0.2))
@@ -153,17 +156,38 @@ func _draw():
 						elif px_per_hour > 15.0: hour_step = 3
 						
 						for h: int in range(0, 24, hour_step):
-							if h == 0: continue
 							var hr_ts: int = day_ts + (h * sec_hour)
-							if hr_ts < start_time or hr_ts > end_time: continue
+							
+							if hr_ts + (hour_step * sec_hour) < visible_start_t: continue
+							if hr_ts > visible_end_t: break
 							
 							var hr_x: float = time_to_x(float(hr_ts))
-							if hr_x >= 0 and hr_x <= width:
+							if h != 0 and hr_x >= 0 and hr_x <= width:
 								draw_line(Vector2(hr_x, axis_y - 5), Vector2(hr_x, axis_y + 5), Color(0.545, 0.545, 0.545, 0.745), 1.0)
-								
 								if px_per_hour > 10.0:
-									var hr_label: String = str(h) + ":00"
+									var hr_label: String = "%02d:00" % h
 									draw_string(font, Vector2(hr_x - 10, axis_y - 12), hr_label, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size - 3, Color(0.3, 0.3, 0.3))
+
+							if px_per_min > 2.0:
+								var min_step: int = 15
+								if px_per_min > 30.0: min_step = 1
+								elif px_per_min > 10.0: min_step = 5
+								elif px_per_min > 5.0: min_step = 10
+								
+								for mn: int in range(0, 60, min_step):
+									if mn == 0: continue
+									
+									var min_ts: int = hr_ts + (mn * 60)
+									
+									if min_ts + (min_step * 60) < visible_start_t: continue
+									if min_ts > visible_end_t: break
+									
+									var min_x: float = time_to_x(float(min_ts))
+									if min_x >= 0 and min_x <= width:
+										draw_line(Vector2(min_x, axis_y - 3), Vector2(min_x, axis_y + 3), Color(0.6, 0.6, 0.6, 0.4), 1.0)
+										if px_per_min > 10.0:
+											var min_label: String = "%02d:%02d" % [h, mn]
+											draw_string(font, Vector2(min_x - 12, axis_y - 12), min_label, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size - 4, Color(0.4, 0.4, 0.4, 0.8))
 		var year_x: float = time_to_x(float(year_ts))
 		if year_x >= 0 and year_x <= width:
 			draw_line(Vector2(year_x, 0), Vector2(year_x, size.y), Color(0, 0, 0, 0.2), 1.5)

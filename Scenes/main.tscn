@@ -32,20 +32,23 @@ delete_btn = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=38602186]
 z_index = -2
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 color = Color(0.92535293, 0.9253528, 0.9253529, 1)
 
 [node name="TimelineArea" type="Control" parent="." unique_id=377072378]
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="TimelineCanvas" type="Control" parent="TimelineArea" unique_id=1006437706]
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource("2_8gbba")
 
 [node name="EventsLayer" type="Control" parent="TimelineArea" unique_id=1369740686]
@@ -55,14 +58,11 @@ offset_bottom = 40.0
 
 [node name="InspectorPanel" type="PanelContainer" parent="." unique_id=1617447826]
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = -1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -221.0
-offset_top = -324.0
-offset_bottom = 324.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kry3j")
@@ -125,7 +125,7 @@ horizontal_alignment = 1
 
 [node name="EventSize" type="HSlider" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=745695674]
 layout_mode = 2
-min_value = 0.1
+min_value = 0.5
 max_value = 2.0
 step = 0.1
 value = 1.0
@@ -143,7 +143,6 @@ oversampling_override = 1.0
 title = "Choose timeline range"
 position = Vector2i(0, 36)
 size = Vector2i(402, 100)
-visible = true
 ok_button_text = "Confirm"
 
 [node name="VBoxContainer" type="HBoxContainer" parent="SetupDialog" unique_id=1114120687]
@@ -188,3 +187,5 @@ layout_mode = 2
 min_value = 1900.0
 max_value = 2100.0
 value = 1900.0
+
+[connection signal="pressed" from="InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn" to="." method="_on_delete_btn_pressed"]
