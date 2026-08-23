@@ -8,6 +8,7 @@ signal selected(event_node: TimelineEvent)
 @export var end_timestamp: int = 0 
 @export var is_above: bool = true
 @export var event_color: Color = Color(0.2, 0.6, 0.86)
+@export var event_scale: float = 1.0
 
 @onready var card: PanelContainer = $Card
 @onready var stalk_line: Line2D = $Line
@@ -64,13 +65,19 @@ func _update_visuals():
 	else:
 		date_label.text = start_date_str
 	
+	title_label.add_theme_font_size_override("font_size", int(16 * event_scale))
+	date_label.add_theme_font_size_override("font_size", int(12 * event_scale))
+	var vbox = title_label.get_parent() as VBoxContainer
+	if vbox:
+		vbox.add_theme_constant_override("separation", int(4 * event_scale))
+	
 	var style_box := StyleBoxFlat.new()
 	style_box.bg_color = event_color
-	style_box.set_corner_radius_all(6)
-	style_box.content_margin_left = 8
-	style_box.content_margin_right = 8
-	style_box.content_margin_top = 4
-	style_box.content_margin_bottom = 4
+	style_box.set_corner_radius_all(int(6 * event_scale))
+	style_box.content_margin_left = int(8 * event_scale)
+	style_box.content_margin_right = int(8 * event_scale)
+	style_box.content_margin_top = int(4 * event_scale)
+	style_box.content_margin_bottom = int(4 * event_scale)
 	card.add_theme_stylebox_override("panel", style_box)
 
 	var y_dir: float = -1.0 if is_above else 1.0

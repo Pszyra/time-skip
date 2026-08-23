@@ -17,6 +17,7 @@ const EVENT_SCENE: PackedScene = preload("res://Scenes/TimelineEvent.tscn")
 @export var date_edit: LineEdit
 @export var end_date_edit: LineEdit
 @export var placement_option: OptionButton
+@export var event_size: HSlider
 @export var color_picker: ColorPickerButton
 @export var delete_btn: Button
 
@@ -35,6 +36,7 @@ func _ready():
 	placement_option.item_selected.connect(_on_inspector_placement_selected)
 	color_picker.color_changed.connect(_on_inspector_color_changed)
 	delete_btn.pressed.connect(_on_inspector_delete_pressed)
+	event_size.value_changed.connect(_on_inspector_size_changed)
 	
 	start_year_spin.value = Time.get_date_dict_from_system().year
 	end_year_spin.value = Time.get_date_dict_from_system().year
@@ -141,6 +143,7 @@ func _select_event(ev: TimelineEvent):
 	end_date_edit.text = _format_date(ev.end_timestamp) if ev.end_timestamp > ev.timestamp else ""
 	placement_option.selected = 0 if ev.is_above else 1
 	color_picker.color = ev.event_color
+	event_size.set_value_no_signal(ev.event_scale)
 
 func _on_inspector_name_changed():
 	if is_instance_valid(active_event):
@@ -186,3 +189,8 @@ func _on_timeline_bg_clicked():
 	
 func _on_setup_confirmed():
 	timeline_canvas.setup_range(int(start_year_spin.value), int(end_year_spin.value))
+
+func _on_inspector_size_changed(value: float):
+	if is_instance_valid(active_event):
+		active_event.event_scale = value
+		active_event._update_visuals()

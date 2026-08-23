@@ -8,7 +8,7 @@ bg_color = Color(0.21590161, 0.21590179, 0.21590167, 0.6)
 corner_radius_top_left = 5
 corner_radius_bottom_left = 5
 
-[node name="Main" type="Control" unique_id=87523776 node_paths=PackedStringArray("timeline_canvas", "events_layer", "setup_dialog", "start_year_spin", "end_year_spin", "inspector_panel", "name_edit", "date_edit", "end_date_edit", "placement_option", "color_picker", "delete_btn")]
+[node name="Main" type="Control" unique_id=87523776 node_paths=PackedStringArray("timeline_canvas", "events_layer", "setup_dialog", "start_year_spin", "end_year_spin", "inspector_panel", "name_edit", "date_edit", "end_date_edit", "placement_option", "event_size", "color_picker", "delete_btn")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,6 +26,7 @@ name_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/NameEdit")
 date_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DateEdit")
 end_date_edit = NodePath("InspectorPanel/MarginContainer/VBoxContainer/EndDateEdit")
 placement_option = NodePath("InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer/PlacementOption")
+event_size = NodePath("InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer2/EventSize")
 color_picker = NodePath("InspectorPanel/MarginContainer/VBoxContainer/EventColorPicker")
 delete_btn = NodePath("InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn")
 
@@ -101,7 +102,7 @@ placeholder_text = "Event end date"
 [node name="VBoxContainer" type="VBoxContainer" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1183420515]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1271950681]
+[node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1271950681]
 layout_mode = 2
 text = "Event location"
 horizontal_alignment = 1
@@ -114,6 +115,21 @@ popup/item_0/id = 0
 popup/item_1/text = "Below"
 popup/item_1/id = 1
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1707008157]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=589944023]
+layout_mode = 2
+text = "Event size"
+horizontal_alignment = 1
+
+[node name="EventSize" type="HSlider" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=745695674]
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 1.0
+
 [node name="EventColorPicker" type="ColorPickerButton" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=622322231]
 layout_mode = 2
 text = "Color"
@@ -125,7 +141,7 @@ text = "Delete event"
 [node name="SetupDialog" type="AcceptDialog" parent="." unique_id=736416122]
 oversampling_override = 1.0
 title = "Choose timeline range"
-position = Vector2i(50, 50)
+position = Vector2i(0, 36)
 size = Vector2i(402, 100)
 visible = true
 ok_button_text = "Confirm"
