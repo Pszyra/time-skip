@@ -2,11 +2,66 @@
 
 [ext_resource type="Script" uid="uid://c4bdlhnj4b3bo" path="res://Scripts/main.gd" id="1_bo1nx"]
 [ext_resource type="Script" uid="uid://cudrykq0gxewa" path="res://Scripts/TimelineCanvas.gd" id="2_8gbba"]
+[ext_resource type="FontFile" uid="uid://mbpeli4ttar5" path="res://Themes/IBMPlexMono-Medium.ttf" id="3_8gbba"]
+[ext_resource type="Theme" uid="uid://dwodilmf726il" path="res://Themes/TimeSkipTheme.res" id="3_jjvhh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kry3j"]
-bg_color = Color(0.21590161, 0.21590179, 0.21590167, 0.6)
-corner_radius_top_left = 5
-corner_radius_bottom_left = 5
+bg_color = Color(0, 0.043137256, 0.12941177, 1)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_bo1nx"]
+color = Color(0.34117648, 0.45490196, 0.6039216, 1)
+grow_begin = 25.0
+grow_end = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjvhh"]
+content_margin_left = 6.0
+content_margin_top = 5.0
+content_margin_right = 6.0
+content_margin_bottom = 5.0
+bg_color = Color(1, 0.18431373, 0.29803923, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.15686275, 0.33333334, 0.6313726, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 3
+anti_aliasing = false
+
+[sub_resource type="Gradient" id="Gradient_jjvhh"]
+offsets = PackedFloat32Array(0, 0.625, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kry3j"]
+gradient = SubResource("Gradient_jjvhh")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_kry3j"]
+colors = PackedColorArray(0.003921569, 0.3019608, 0.92156863, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jjvhh"]
+gradient = SubResource("Gradient_kry3j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_54sl6"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(640, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, -30, 0)
+scale_min = 0.79999995
+scale_max = 1.1999999
+color = Color(0.22940168, 0.4787714, 0.99846035, 1)
+color_ramp = SubResource("GradientTexture1D_jjvhh")
 
 [node name="Main" type="Control" unique_id=87523776 node_paths=PackedStringArray("timeline_canvas", "events_layer", "setup_dialog", "start_year_spin", "end_year_spin", "inspector_panel", "name_edit", "date_edit", "end_date_edit", "placement_option", "event_size", "color_picker", "delete_btn")]
 layout_mode = 3
@@ -36,19 +91,38 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.92535293, 0.9253528, 0.9253529, 1)
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9137255, 0.9372549, 0.972549, 1)
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect" unique_id=1903748653]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 94.0
+offset_right = -30.0
+offset_bottom = -624.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2509804, 0.49411765, 1, 1)
 
 [node name="TimelineArea" type="Control" parent="." unique_id=377072378]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TimelineCanvas" type="Control" parent="TimelineArea" unique_id=1006437706]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2_8gbba")
 
 [node name="EventsLayer" type="Control" parent="TimelineArea" unique_id=1369740686]
@@ -59,32 +133,37 @@ offset_bottom = 40.0
 [node name="InspectorPanel" type="PanelContainer" parent="." unique_id=1617447826]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
+anchor_left = 0.75500005
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -221.0
+offset_left = 0.59991455
+offset_top = 71.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("3_jjvhh")
 theme_override_styles/panel = SubResource("StyleBoxFlat_kry3j")
 
 [node name="MarginContainer" type="MarginContainer" parent="InspectorPanel" unique_id=1052919123]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="InspectorPanel/MarginContainer" unique_id=216242910]
 layout_mode = 2
 theme_override_constants/separation = 30
 
-[node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1440225493]
-layout_mode = 2
-text = "Edit menu"
-horizontal_alignment = 1
-
 [node name="HSeparator" type="HSeparator" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1320501764]
 layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_bo1nx")
+
+[node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1440225493]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.003921569, 0.3019608, 0.92156863, 1)
+theme_override_fonts/font = ExtResource("3_8gbba")
+theme_override_font_sizes/font_size = 22
+text = "EDIT MENU"
 
 [node name="NameEdit" type="TextEdit" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=1748810414]
 layout_mode = 2
@@ -105,7 +184,6 @@ layout_mode = 2
 [node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1271950681]
 layout_mode = 2
 text = "Event location"
-horizontal_alignment = 1
 
 [node name="PlacementOption" type="OptionButton" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1500134847]
 layout_mode = 2
@@ -121,7 +199,6 @@ layout_mode = 2
 [node name="Label" type="Label" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=589944023]
 layout_mode = 2
 text = "Event size"
-horizontal_alignment = 1
 
 [node name="EventSize" type="HSlider" parent="InspectorPanel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=745695674]
 layout_mode = 2
@@ -136,28 +213,42 @@ text = "Color"
 
 [node name="DeleteBtn" type="Button" parent="InspectorPanel/MarginContainer/VBoxContainer" unique_id=164708350]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.18431373, 0.29803923, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.043137256, 0.12941177, 1)
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jjvhh")
 text = "Delete event"
+
+[node name="Polygon2D" type="Polygon2D" parent="InspectorPanel" unique_id=1384068575]
+scale = Vector2(1, 0.733)
+color = Color(0, 0.043137256, 0.12941177, 1)
+antialiased = true
+polygon = PackedVector2Array(361, 0, 0, 0, 38, -96.86221, 361, -96.86221)
+uv = PackedVector2Array(299, 0, 0, 0, 36, -71, 299, -71)
 
 [node name="SetupDialog" type="AcceptDialog" parent="." unique_id=736416122]
 oversampling_override = 1.0
 title = "Choose timeline range"
 position = Vector2i(0, 36)
-size = Vector2i(402, 100)
+size = Vector2i(605, 100)
+visible = true
+theme = ExtResource("3_jjvhh")
 ok_button_text = "Confirm"
 
 [node name="VBoxContainer" type="HBoxContainer" parent="SetupDialog" unique_id=1114120687]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -193.0
-offset_top = 8.0
-offset_right = 193.0
-offset_bottom = 51.0
+offset_left = -298.5
+offset_top = 4.0
+offset_right = 298.5
+offset_bottom = 54.0
 grow_horizontal = 2
+theme = ExtResource("3_jjvhh")
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SetupDialog/VBoxContainer" unique_id=1967432177]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Label" type="Label" parent="SetupDialog/VBoxContainer/HBoxContainer" unique_id=1134736565]
@@ -176,6 +267,7 @@ theme_override_constants/separation = 8
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="SetupDialog/VBoxContainer" unique_id=2030867027]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Label" type="Label" parent="SetupDialog/VBoxContainer/HBoxContainer2" unique_id=1556014838]
@@ -188,4 +280,14 @@ min_value = 1900.0
 max_value = 2100.0
 value = 1900.0
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=217386364]
+visible = false
+z_index = -2
+position = Vector2(640, 728)
+amount = 40
+texture = SubResource("GradientTexture2D_kry3j")
+lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_54sl6")
+
+[connection signal="timeline_single_clicked" from="TimelineArea/TimelineCanvas" to="TimelineArea/TimelineCanvas" method="_on_timeline_single_clicked"]
 [connection signal="pressed" from="InspectorPanel/MarginContainer/VBoxContainer/DeleteBtn" to="." method="_on_delete_btn_pressed"]
