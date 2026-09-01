@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://do1kk5iy5a2xy"]
+
+[ext_resource type="Script" uid="uid://vfnxyaptwn4" path="res://Scenes/menu_bar.gd" id="1_0uqx1"]
+[ext_resource type="Texture2D" uid="uid://bljoikam2fda8" path="res://Themes/Nowy projekt(2).png" id="1_873hr"]
+[ext_resource type="Theme" uid="uid://dwodilmf726il" path="res://Themes/TimeSkipTheme.res" id="2_6p2jn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_54sl6"]
+bg_color = Color(0.9137255, 0.9372549, 0.972549, 1)
+shadow_size = 10
+
+[sub_resource type="Animation" id="Animation_6p2jn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_av4im"]
+resource_name = "Slide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 100)]
+}
+
+[sub_resource type="Animation" id="Animation_0uqx1"]
+resource_name = "Slide_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 100), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_anh6k"]
+_data = {
+&"RESET": SubResource("Animation_6p2jn"),
+&"Slide": SubResource("Animation_av4im"),
+&"Slide_up": SubResource("Animation_0uqx1")
+}
+
+[node name="MenuBar" type="Control" unique_id=305170060 node_paths=PackedStringArray("texture_button", "anim_player", "year_label", "today_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_0uqx1")
+texture_button = NodePath("Panel/TextureButton")
+anim_player = NodePath("AnimationPlayer")
+year_label = NodePath("Panel/Node2D/YearLabel")
+today_button = NodePath("Panel/TodayButton")
+
+[node name="Panel" type="Panel" parent="." unique_id=128469422]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.069000006
+offset_bottom = 50.31998
+mouse_filter = 2
+theme = ExtResource("2_6p2jn")
+theme_override_styles/panel = SubResource("StyleBoxFlat_54sl6")
+
+[node name="TextureButton" type="TextureButton" parent="Panel" unique_id=1507254403]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_right = 630.0
+offset_bottom = 199.99998
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+toggle_mode = true
+texture_normal = ExtResource("1_873hr")
+
+[node name="Node2D" type="Node2D" parent="Panel" unique_id=528908695]
+position = Vector2(12, 47)
+scale = Vector2(1, 0.99999994)
+skew = 0.26179934
+
+[node name="YearLabel" type="Label" parent="Panel/Node2D" unique_id=1841577590]
+offset_left = 1.8897295
+offset_top = -35.19939
+offset_right = 124.88973
+offset_bottom = 36.80061
+theme = ExtResource("2_6p2jn")
+theme_override_font_sizes/font_size = 48
+text = "2026"
+
+[node name="TodayButton" type="Button" parent="Panel" unique_id=1048359165]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -22.000004
+offset_right = 44.5
+offset_bottom = 22.000004
+grow_horizontal = 2
+grow_vertical = 2
+text = "Today"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1816209356]
+libraries/ = SubResource("AnimationLibrary_anh6k")
+
+[connection signal="toggled" from="Panel/TextureButton" to="." method="_on_texture_button_toggled"]
