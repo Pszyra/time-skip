@@ -5,6 +5,7 @@ const EVENT_SCENE: PackedScene = preload("res://Scenes/TimelineEvent.tscn")
 @export_group("Core")
 @export var timeline_canvas: TimelineCanvas
 @export var events_layer: Control
+@export var menu_bar: MenuBarUI
 
 @export_group("Setup Dialog")
 @export var setup_dialog: AcceptDialog
@@ -27,6 +28,9 @@ func _ready():
 	if not setup_dialog: return
 	setup_dialog.confirmed.connect(_on_setup_confirmed)
 	setup_dialog.popup_centered()
+	timeline_canvas.middle_year_changed.connect(_on_middle_year_changed)
+	if menu_bar:
+		menu_bar.today_requested.connect(timeline_canvas.go_to_today)
 	
 	timeline_canvas.timeline_double_clicked.connect(_create_event_at)
 	timeline_canvas.timeline_single_clicked.connect(_on_timeline_bg_clicked)
@@ -194,3 +198,7 @@ func _on_inspector_size_changed(value: float):
 	if is_instance_valid(active_event):
 		active_event.event_scale = value
 		active_event._update_visuals()
+
+func _on_middle_year_changed(year: int) -> void:
+	if menu_bar:
+		menu_bar.set_year(year)

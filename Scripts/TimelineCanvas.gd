@@ -3,6 +3,7 @@ extends Control
 
 signal timeline_double_clicked(timestamp: int)
 signal timeline_single_clicked()
+signal middle_year_changed(year: int)
 
 var start_time: int = 0
 var end_time: int = 0
@@ -12,6 +13,7 @@ var view_offset_time: float = 0.0
 var _is_dragging: bool = false
 var _drag_start_pos: Vector2 = Vector2.ZERO
 var _drag_start_offset: float = 0.0
+var _last_middle_year: int = 0
 
 const sec_hour: int = 3600
 const sec_day: int = 86400
@@ -206,3 +208,26 @@ func _current_time_dot():
 
 func _process(_delta: float):
 	queue_redraw()
+	
+	var middle_x: float = size.x * 0.5
+	var middle_time: int = int(x_to_time(middle_x))
+	
+	var dt: Dictionary = Time.get_datetime_dict_from_unix_time(middle_time)
+	
+	if int(dt.year) != _last_middle_year:
+		_last_middle_year = int(dt.year)
+		middle_year_changed.emit(_last_middle_year)
+
+func go_to_today() -> void:
+	var utc_time: float = Time.get_unix_time_from_system()
+	var tz_offset: float = Time.get_time_zone_from_system().bias * 60.0
+	var local_time: float = utc_time + tz_offset
+	
+	if local_time >= start_time and local_time <= end_time:
+		var screen_width_in_seconds: float = size.x / zoom
+		
+		view_offset_time = local_time - (screen_width_in_seconds * 0.5)
+		
+		_clamp_view()
+	else:
+		print("Current time is outside range")
